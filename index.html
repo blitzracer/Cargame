@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PixelPoint</title>
-<link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="style.css">
+    <title>Pixel Racer</title>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#00ff55"> <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
 </head>
 <body>
@@ -16,7 +16,7 @@
     <div class="game-container" id="gameContainer">
         <canvas id="racing-canvas" width="320" height="600"></canvas>
         <div id="introOverlay" class="overlay">
-            <h1>PixelPoint</h1>
+            <h1>Pixel Racer</h1>
             <p>Use your mouse or touch to steer!</p>
             <button id="playButton" class="control-btn fade-in" style="opacity: 1;">Start Game</button>
         </div>
@@ -44,5 +44,14 @@
     </div>
 
     <script src="script.js"></script>
+    
+    <script>
+    if ('serviceWorker' in navigator) {
+      // The scope: '/' ensures the service worker controls the entire site
+      navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
+        .then(reg => console.log('Service Worker Registered'))
+        .catch(err => console.error('Service Worker Registration Failed:', err));
+    }
+    </script>
 </body>
 </html>
