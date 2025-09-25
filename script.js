@@ -1,3 +1,13 @@
+// register service worker
+
+if ('serviceWorker' in navigator) {
+  // Use 'load' listener to ensure the page has loaded, but simple registration is also fine.
+  // The immediate registration outside of an event listener is generally a good PWA practice.
+  navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
+    .then(reg => console.log('Service Worker Registered Successfully!'))
+    .catch(err => console.error('Service Worker Registration Failed:', err));
+}
+
 const gameContainer = document.getElementById("gameContainer");
 const introOverlay = document.getElementById("introOverlay");
 const playButton = document.getElementById("playButton");
@@ -57,13 +67,6 @@ function initializeMusic() {
     }
 }
 initializeMusic();
-// Register the Service Worker (REQUIRED for PWA to function)
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
-    .then(reg => console.log('Service Worker Registered'))
-    .catch(err => console.error('Service Worker Registration Failed:', err));
-}
-
 // Game variables
 let player, obstacles, shields, disasters, score, highScore, gameOver;
 
