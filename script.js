@@ -57,6 +57,12 @@ function initializeMusic() {
     }
 }
 initializeMusic();
+// Register the Service Worker (REQUIRED for PWA to function)
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
+    .then(reg => console.log('Service Worker Registered'))
+    .catch(err => console.error('Service Worker Registration Failed:', err));
+}
 
 // Game variables
 let player, obstacles, shields, disasters, score, highScore, gameOver;
