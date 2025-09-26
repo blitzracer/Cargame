@@ -1,10 +1,12 @@
-// register service worker
+// Service Worker Registration (Modern/Corrected Pattern)
 if ('serviceWorker' in navigator) {
-  // Use 'load' listener to ensure the page is fully loaded before trying to register the Service Worker.
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
-      .then(reg => console.log('Service Worker Registered Successfully!'))
-      .catch(err => console.error('Service Worker Registration Failed:', err));
+  window.addEventListener('load', async () => {
+    try {
+      const registration = await navigator.serviceWorker.register('/sw.js');
+      console.log('ServiceWorker registered:', registration.scope);
+    } catch (error) {
+      console.error('ServiceWorker registration failed:', error);
+    }
   });
 }
 
