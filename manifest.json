@@ -2,7 +2,7 @@
   "name": "BlitzRacer",
   "short_name": "BlitzRacer",
   "description": "A fast-paced pixel art racing and dodging game.",
-  "start_url": "/Cargame/", 
+  "start_url": "/", 
   "scope": "/Cargame/",
   "display": "standalone",
   "orientation": "portrait",
