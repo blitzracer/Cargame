@@ -1,6 +1,6 @@
 {
   "name": "Pixelpoint",
-  "short_name": "PP",
+  "short_name": "PixelPoint",
   "description": "A fast-paced pixel art racing and dodging game.",
   "start_url": "/Cargame/", 
   "scope": "/Cargame/",
