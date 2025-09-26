@@ -1,7 +1,7 @@
 // Service Worker file: service-worker.js
 
 // Declare constants using lowercase 'const'
-const CACHE_NAME = 'pixel-racer-cache-v7'; // Ensure this matches your latest version
+const CACHE_NAME = 'pixel-racer-cache-v8'; // Ensure this matches your latest version
 const urlsToCache = [
   '/Cargame/', 
   '/Cargame/index.html',
