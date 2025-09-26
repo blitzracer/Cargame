@@ -1,6 +1,6 @@
 {
-  "name": "Pixelpoint",
-  "short_name": "PixelPoint",
+  "name": "BlitzRacer",
+  "short_name": "BlitzRacer",
   "description": "A fast-paced pixel art racing and dodging game.",
   "start_url": "/Cargame/", 
   "scope": "/Cargame/",
