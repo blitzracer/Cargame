@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pixel Racer</title>
-    
-    <link rel="manifest" href="/manifest.json">
+
+    <link rel="manifest" href="/Cargame/manifest.json">
     <meta name="theme-color" content="#00ff55"> 
 
-    <link rel="icon" type="image/png" href="cargame192.png"> 
+    <link rel="icon" type="image/png" href="/Cargame/cargame192.png"> 
 
-    <link rel="apple-touch-icon" href="cargame512.png"> 
-    
-    <link rel="stylesheet" href="style.css">
+    <link rel="apple-touch-icon" href="/Cargame/cargame512.png"> 
+
+    <link rel="stylesheet" href="/Cargame/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
 </head>
 <body>
-    <audio id="bg-music" src="cargamebg.mp3" autoplay loop muted></audio>
+    <audio id="bg-music" src="/Cargame/cargamebg.mp3" autoplay loop muted></audio>
     <div id="high-score" class="score-display">High Score: 0</div>
     <div id="score" class="score-display">Score: 0</div>
 
@@ -50,15 +50,7 @@
       </div>
     </div>
 
-    <script src="script.js"></script>
-    
-    <script>
-    if ('serviceWorker' in navigator) {
-      // The scope: '/' ensures the service worker controls the entire site
-      navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
-        .then(reg => console.log('Service Worker Registered'))
-        .catch(err => console.error('Service Worker Registration Failed:', err));
-    }
-    </script>
-</body>
+    <script src="/Cargame/script.js"></script>
+
+    </body>
 </html>
