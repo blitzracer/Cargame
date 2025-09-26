@@ -1,3 +1,22 @@
+
+// TEMPORARY FIX: Add this to the TOP of script.js
+if (navigator.serviceWorker && location.href.includes('Cargame')) {
+    navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for(let registration of registrations) {
+            registration.unregister();
+            console.log("OLD SERVICE WORKER UNREGISTERED");
+        } 
+        // Reload the page after unregistering
+        window.location.reload(true);
+    });
+}
+// END OF TEMPORARY FIX
+
+
+
+
+
+
 // Service Worker Registration (Corrected for GitHub Project Pages)
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', async () => {
