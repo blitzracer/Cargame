@@ -18,6 +18,12 @@
       "src": "/Cargame/cargame512.png", 
       "sizes": "512x512",
       "type": "image/png"
+    },
+    {
+      // NEW ENTRY: This tells the device this icon is safe to adapt (mask)
+      "src": "/Cargame/cargame512.png", 
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable" // <--- THE CRITICAL ADDITION
     }
-  ]
-}
+]
