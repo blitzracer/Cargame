@@ -1,23 +1,23 @@
 // Service Worker file: service-worker.js
 
 // Declare constants using lowercase 'const'
-const CACHE_NAME = 'pixel-racer-cache-v3'; // <--- INCREMENTED CACHE NAME
+const CACHE_NAME = 'pixel-racer-cache-v4'; // <--- INCREMENTED CACHE NAME AND VERSION
 const urlsToCache = [
-  '/', 
-  '/index.html',
-  '/style.css',
-  '/script.js',
-  '/manifest.json',
-  '/offline.html', // <--- Offline Fallback page must exist
-  '/cargame192.png',
-  '/cargame512.png',
-  '/cargamebg.mp3',
-  '/shieldcargame.mp3'
+  '/Cargame/', // <--- MUST INCLUDE THE DIRECTORY ROOT
+  '/Cargame/index.html', // <--- CORRECTED PATH
+  '/Cargame/style.css', // <--- CORRECTED PATH
+  '/Cargame/script.js', // <--- CORRECTED PATH
+  '/Cargame/manifest.json', // <--- CORRECTED PATH
+  '/Cargame/offline.html', // <--- CORRECTED PATH
+  '/Cargame/cargame192.png', // <--- CORRECTED PATH
+  '/Cargame/cargame512.png', // <--- CORRECTED PATH
+  '/Cargame/cargamebg.mp3', // <--- CORRECTED PATH
+  '/Cargame/shieldcargame.mp3' // <--- CORRECTED PATH
 ];
 
 // ---------------------- INSTALLATION ----------------------
 self.addEventListener('install', (event) => {
-  console.log('[Service Worker] Installing v3...');
+  console.log('[Service Worker] Installing v4...');
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       // All files in urlsToCache MUST be successfully fetched, 
@@ -61,10 +61,10 @@ self.addEventListener('fetch', (event) => {
         // 2. Fetch from network if not in cache
         return fetch(event.request).catch(() => {
           // 3. Network failed: Serve fallback only for HTML navigation requests
-          // This ensures images/CSS failing to load don't serve the offline page instead.
+          // Ensure the fallback path is also corrected
           if (event.request.mode === 'navigate' || 
               (event.request.method === 'GET' && event.request.headers.get('accept').includes('text/html'))) {
-            return caches.match('/offline.html');
+            return caches.match('/Cargame/offline.html'); // <--- CORRECTED PATH
           }
         });
       })
