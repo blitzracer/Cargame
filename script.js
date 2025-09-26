@@ -1,14 +1,16 @@
-// Service Worker Registration (Modern/Corrected Pattern)
+// Service Worker Registration (Corrected for GitHub Project Pages)
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('/sw.js');
+      // CORRECTED: Uses /Cargame/ and the correct file name: service-worker.js
+      const registration = await navigator.serviceWorker.register('/Cargame/service-worker.js', { scope: '/Cargame/' });
       console.log('ServiceWorker registered:', registration.scope);
     } catch (error) {
       console.error('ServiceWorker registration failed:', error);
     }
   });
 }
+
 
 const gameContainer = document.getElementById("gameContainer");
 const introOverlay = document.getElementById("introOverlay");
