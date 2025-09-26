@@ -1,7 +1,7 @@
 // Service Worker file: service-worker.js
 
 // Declare constants using lowercase 'const'
-const CACHE_NAME = 'pixel-racer-cache-v4'; // <--- INCREMENTED CACHE NAME AND VERSION
+const CACHE_NAME = 'pixel-racer-cache-v5'; // <--- INCREMENTED CACHE NAME AND VERSION
 const urlsToCache = [
   '/Cargame/', // <--- MUST INCLUDE THE DIRECTORY ROOT
   '/Cargame/index.html', // <--- CORRECTED PATH
