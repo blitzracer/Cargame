@@ -1,11 +1,11 @@
 // register service worker
-
 if ('serviceWorker' in navigator) {
-  // Use 'load' listener to ensure the page has loaded, but simple registration is also fine.
-  // The immediate registration outside of an event listener is generally a good PWA practice.
-  navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
-    .then(reg => console.log('Service Worker Registered Successfully!'))
-    .catch(err => console.error('Service Worker Registration Failed:', err));
+  // Use 'load' listener to ensure the page is fully loaded before trying to register the Service Worker.
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
+      .then(reg => console.log('Service Worker Registered Successfully!'))
+      .catch(err => console.error('Service Worker Registration Failed:', err));
+  });
 }
 
 const gameContainer = document.getElementById("gameContainer");
@@ -575,7 +575,6 @@ for (let obs of obstacles) {
 
   requestAnimationFrame(updateGame);
 }
-
 function endGame() {
   gameOver = true;
   if (score > highScore) {
@@ -745,15 +744,3 @@ canvas.addEventListener('touchmove', (e) => {
     player.x = Math.max(0, Math.min(player.x, canvas.width - player.width));
   }
 });
-// Service Worker Registration
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js')
-      .then((reg) => {
-        console.log('Service Worker registered! Scope:', reg.scope);
-      })
-      .catch((err) => {
-        console.error('Service Worker registration failed:', err);
-      });
-  });
-      }
