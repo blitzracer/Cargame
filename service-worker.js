@@ -1,8 +1,7 @@
 // Service Worker file: service-worker.js
 
 // Declare constants using lowercase 'const'
-// 🚨 Bumped version to v7 to ensure the new files (Tone.js, correct fallback logic) are cached.
-const CACHE_NAME = 'pixel-racer-cache-v7'; 
+const CACHE_NAME = 'pixel-racer-cache-v7'; // Ensure this matches your latest version
 const urlsToCache = [
   '/Cargame/', 
   '/Cargame/index.html',
@@ -15,13 +14,12 @@ const urlsToCache = [
   '/Cargame/cargamebg.mp3',
   '/Cargame/shieldcargame.mp3',
   
-  // 🚨 CRITICAL ADDITION: External Tone.js library must be cached for offline audio
+  // CRITICAL: External Tone.js library
   'https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js' 
 ];
 
 // ---------------------- INSTALLATION ----------------------
 self.addEventListener('install', (event) => {
-  // 🚨 Console log message now matches the actual CACHE_NAME (v7)
   console.log('[Service Worker] Installing v7...');
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -49,29 +47,30 @@ self.addEventListener('activate', (event) => {
       );
     })
   );
-  // Take control of the current page immediately
   self.clients.claim();
 });
 
-// ---------------------- FETCH (Cache-First with Offline Fallback) ----------------------
+// ---------------------- FETCH (Cache-First with Game Fallback) ----------------------
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
-        // 1. Return cached response if found
+        // 1. Return cached response if found (for all assets)
         if (response) {
           return response;
         }
 
         // 2. Fetch from network if not in cache
         return fetch(event.request).catch(() => {
-          // 3. Network failed: Serve fallback only for HTML navigation requests
+          // 3. Network failed: Serve the cached game for navigation requests
           if (event.request.mode === 'navigate' || 
               (event.request.method === 'GET' && event.request.headers.get('accept').includes('text/html'))) {
             
-            // 🚨 CRITICAL CHANGE: Serve the cached main game page for OFFLINE PLAY.
-            return caches.match('/Cargame/index.html');
+            // CRITICAL CHANGE: Serves the full game from cache for offline play
+            return caches.match('/Cargame/index.html'); 
           }
+          // For all other files (like images or script requests that fail), 
+          // the browser will show the standard network error (which is expected)
         });
       })
   );
