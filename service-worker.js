@@ -1,8 +1,8 @@
 // Service Worker file: service-worker.js
 
 // Declare constants using lowercase 'const'
-// 🚨 CORRECTED: Bumped version to v9 to force installation of all recent fixes.
-const CACACHE_NAME = 'blitzracer-v11'; 
+// 🚨 FIXED TYPO and BUMPED VERSION (v12) for a guaranteed update.
+const CACHE_NAME = 'blitzracer-v12'; 
 const urlsToCache = [
   '/Cargame/', 
   '/Cargame/index.html',
@@ -21,8 +21,8 @@ const urlsToCache = [
 
 // ---------------------- INSTALLATION ----------------------
 self.addEventListener('install', (event) => {
-  // 🚨 CORRECTED: Console log now matches the actual CACHE_NAME (v9)
-  console.log('[Service Worker] Installing v9...');
+  // 🚨 FIXED: Console log now matches the actual CACHE_NAME (v12).
+  console.log('[Service Worker] Installing v12...');
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       // All files in urlsToCache MUST be successfully fetched, 
