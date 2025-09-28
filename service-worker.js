@@ -1,7 +1,8 @@
 // Service Worker file: service-worker.js
 
 // Declare constants using lowercase 'const'
-const CACHE_NAME = 'blitzracer-v9'; // Ensure this matches your latest version
+// 🚨 CORRECTED: Bumped version to v9 to force installation of all recent fixes.
+const CACACHE_NAME = 'blitzracer-v9'; 
 const urlsToCache = [
   '/Cargame/', 
   '/Cargame/index.html',
@@ -20,7 +21,8 @@ const urlsToCache = [
 
 // ---------------------- INSTALLATION ----------------------
 self.addEventListener('install', (event) => {
-  console.log('[Service Worker] Installing v7...');
+  // 🚨 CORRECTED: Console log now matches the actual CACHE_NAME (v9)
+  console.log('[Service Worker] Installing v9...');
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       // All files in urlsToCache MUST be successfully fetched, 
@@ -66,7 +68,7 @@ self.addEventListener('fetch', (event) => {
           if (event.request.mode === 'navigate' || 
               (event.request.method === 'GET' && event.request.headers.get('accept').includes('text/html'))) {
             
-            // CRITICAL CHANGE: Serves the full game from cache for offline play
+            // CORRECT: Serves the full game from cache for offline play
             return caches.match('/Cargame/index.html'); 
           }
           // For all other files (like images or script requests that fail), 
