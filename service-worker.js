@@ -1,7 +1,7 @@
 // Service Worker file: service-worker.js
 
 // Declare constants using lowercase 'const'
-const CACHE_NAME = 'blitzracer-v1'; // Ensure this matches your latest version
+const CACHE_NAME = 'blitzracer-v9'; // Ensure this matches your latest version
 const urlsToCache = [
   '/Cargame/', 
   '/Cargame/index.html',
