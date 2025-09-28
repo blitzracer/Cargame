@@ -2,7 +2,7 @@
 
 // Declare constants using lowercase 'const'
 // 🚨 CORRECTED: Bumped version to v9 to force installation of all recent fixes.
-const CACACHE_NAME = 'blitzracer-v10'; 
+const CACACHE_NAME = 'blitzracer-v9'; 
 const urlsToCache = [
   '/Cargame/', 
   '/Cargame/index.html',
