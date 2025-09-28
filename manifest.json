@@ -1,6 +1,6 @@
 {
-  "name": "BlitzRacer",
-  "short_name": "BlitzRacer",
+  "name": "Pixelpoint",
+  "short_name": "PixelPoint",
   "description": "A fast-paced pixel art racing and dodging game.",
   "start_url": "/Cargame/", 
   "scope": "/Cargame/",
@@ -18,11 +18,6 @@
       "src": "/Cargame/cargame512.png", 
       "sizes": "512x512",
       "type": "image/png"
-    },
-    {
-      "src": "/Cargame/cargame512.png", 
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
     }
-]
+  ]
+}
