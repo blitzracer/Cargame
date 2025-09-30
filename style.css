@@ -1,12 +1,10 @@
 /* --- Global Reset & Non-Standard UX Fixes --- */
 * {
-  /* Removes the blue/gray highlight on mobile devices when tapping */
   -webkit-tap-highlight-color: transparent;
-  /* Prevents all text on the page from being selectable */
-  user-select: none;          /* Standard property */
-  -webkit-user-select: none;  /* Safari/Chrome/iOS */
-  -moz-user-select: none;     /* Firefox */
-  -ms-user-select: none;      /* IE/Edge */
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 /* --- Modal Styles --- */
@@ -71,13 +69,15 @@
     color: #1ec1a6;
     border-color: #1ec1a6;
 }
+
+/* --- MAIN BACKGROUND --- */
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    background-color: #222;
+    background-color: #111111;
     font-family: sans-serif;
     overflow: hidden;
     position: relative;
@@ -89,7 +89,7 @@ body {
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     overflow: hidden;
-    background-color: #111;
+    background-color: #111111;
     border: 3px solid transparent;
     transition: border-color 0.3s;
 }
@@ -97,15 +97,12 @@ body {
 .game-container.nitro-active {
     border-color: #ffd700;
 }
-
 .game-container.shield-active {
     border-color: #00bfff;
 }
-
 .game-container.disaster-active {
     animation: fire-border 0.5s infinite alternate;
 }
-
 @keyframes fire-border {
     from { border-color: #ff4500; }
     to { border-color: #ffa500; }
@@ -115,8 +112,8 @@ body {
 #racing-canvas {
     display: block;
     background: #666; /* Road color */
-    width: 320px; /* Decreased */
-    height: 600px; /* Decreased */
+    width: 320px;
+    height: 600px;
 }
 
 /* Overlays and Text */
@@ -148,8 +145,8 @@ body {
     cursor: pointer;
     border: none;
     border-radius: 5px;
-    background-color: #00ff55;
-    color: #111;
+    background-color: #222; /* Was #00ff55, now dark */
+    color: #fff;
     transition: background-color 0.3s, opacity 0.5s;
 }
 
@@ -173,13 +170,8 @@ body {
     z-index: 20;
 }
 
-#score {
-    left: 10px;
-}
-
-#high-score {
-    right: 10px;
-}
+#score { left: 10px; }
+#high-score { right: 10px; }
 
 /* Nitro and Shield Button Styling */
 .booster-btn {
@@ -214,13 +206,10 @@ body {
     cursor: pointer;
     box-shadow: 0 0 15px #00ff55;
 }
-
 .booster-btn.ready #nitroFill { background-color: #00ff55; }
-
 .booster-btn.using {
     box-shadow: 0 0 20px yellow;
 }
-
 .booster-btn span {
     position: relative;
     z-index: 2;
@@ -230,7 +219,6 @@ body {
 .color-cycle-animation {
     animation: colorShift 0.5s infinite alternate;
 }
-
 @keyframes colorShift {
     from { background-color: #111; }
     to { background-color: #220022; }
@@ -258,7 +246,6 @@ body {
     justify-content: center;
     align-items: center;
 }
-
 .music-btn.off {
     color: #FF4500;
     border-color: #FF4500;
@@ -283,7 +270,7 @@ body {
     font-weight: bold;
     text-shadow: 0 0 5px #000;
     z-index: 20;
-    pointer-events: none; /* Make it non-clickable */
+    pointer-events: none;
     box-shadow: 0 0 15px #00aaff;
     opacity: 1;
 }
