@@ -7,7 +7,7 @@
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#111111",
-  "theme_color": "#00ff55",
+  "theme_color": "#111111",
   "icons": [
     {
       "src": "/Cargame/cargame192.png",
