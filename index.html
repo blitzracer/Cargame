@@ -5,52 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BlitzRacer</title>
 
+    <!-- PWA Manifest -->
     <link rel="manifest" href="/Cargame/manifest.json">
-    <meta name="theme-color" content="#00ff55"> 
 
-    <link rel="icon" type="image/png" href="/Cargame/cargame192.png"> 
+    <!-- Theme color for mobile browsers -->
+    <meta name="theme-color" content="#00ff55">
 
-    <link rel="apple-touch-icon" href="/Cargame/cargame512.png"> 
+    <!-- Favicon & Apple Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="/Cargame/cargame192.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="/Cargame/cargame512.png">
 
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="/Cargame/style.css">
+
+    <!-- Tone.js Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
+    <!-- Background Music -->
     <audio id="bg-music" src="/Cargame/cargamebg.mp3" autoplay loop muted></audio>
+
+    <!-- Scores -->
     <div id="high-score" class="score-display">High Score: 0</div>
     <div id="score" class="score-display">Score: 0</div>
 
+    <!-- Game Container -->
     <div class="game-container" id="gameContainer">
         <canvas id="racing-canvas" width="320" height="600"></canvas>
+
+        <!-- Intro Overlay -->
         <div id="introOverlay" class="overlay">
             <h1>BlitzRacer</h1>
             <p>Use your mouse or touch to steer!</p>
             <button id="playButton" class="control-btn fade-in" style="opacity: 1;">Start Game</button>
         </div>
 
+        <!-- Controls -->
         <button id="musicToggle" class="control-btn music-btn off">🔇</button>
         <button id="nitroBtn" class="booster-btn" disabled>
             <div id="nitroFill" class="fill-bar"></div>
             <span>NITRO</span>
         </button>
 
+        <!-- Shield Display -->
         <div id="shieldDisplay" style="display: none;">
             <span>🛡️</span>
             <span id="shieldTime"></span>
         </div>
     </div>
 
+    <!-- Music Modal -->
     <div id="musicModal">
-      <div class="modal-content">
-        <p>For more enjoyment, please turn on the bg music button.</p>
-        <div class="modal-btns">
-          <button class="modal-btn yes">Yes</button>
-          <button class="modal-btn cancel">Cancel</button>
+        <div class="modal-content">
+            <p>For more enjoyment, please turn on the bg music button.</p>
+            <div class="modal-btns">
+                <button class="modal-btn yes">Yes</button>
+                <button class="modal-btn cancel">Cancel</button>
+            </div>
         </div>
-      </div>
     </div>
 
+    <!-- Game Script -->
     <script src="/Cargame/script.js"></script>
-
 </body>
 </html>
