@@ -138,15 +138,15 @@ body {
     margin-bottom: 20px;
 }
 
-/* Button Styling */
+/* Button Styling - GREEN RESTORED */
 .control-btn {
     padding: 10px 20px;
     font-size: 1.2em;
     cursor: pointer;
     border: none;
     border-radius: 5px;
-    background-color: #222; /* Was #00ff55, now dark */
-    color: #fff;
+    background-color: #00ff55; /* Restored green */
+    color: #111; /* Dark text */
     transition: background-color 0.3s, opacity 0.5s;
 }
 
@@ -220,7 +220,7 @@ body {
     animation: colorShift 0.5s infinite alternate;
 }
 @keyframes colorShift {
-    from { background-color: #111; }
+    from { background-color: #00ff55; }
     to { background-color: #220022; }
 }
 
