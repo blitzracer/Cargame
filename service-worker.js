@@ -1,8 +1,8 @@
 // Service Worker file: service-worker.js
 
 // Declare constants using lowercase 'const'
-// 🚨 FIXED TYPO and BUMPED VERSION (v12) for a guaranteed update.
-const CACHE_NAME = 'blitzracer-v12'; 
+// 🚨 FIXED TYPO and BUMPED VERSION (v13) for a guaranteed update.
+const CACHE_NAME = 'blitzracer-v13'; 
 const urlsToCache = [
   '/Cargame/', 
   '/Cargame/index.html',
