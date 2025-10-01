@@ -1,4 +1,3 @@
-
 // Service Worker Registration (Corrected for GitHub Project Pages)
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', async () => {
@@ -11,7 +10,6 @@ if ('serviceWorker' in navigator) {
     }
   });
 }
-
 
 const gameContainer = document.getElementById("gameContainer");
 const introOverlay = document.getElementById("introOverlay");
@@ -72,6 +70,7 @@ function initializeMusic() {
     }
 }
 initializeMusic();
+
 // Game variables
 let player, obstacles, shields, disasters, score, highScore, gameOver;
 
@@ -168,7 +167,6 @@ function drawRoadLines() {
 // Function to handle Fullscreen Request
 function requestFullScreen() {
   const element = document.documentElement; // Targets the whole page (HTML element)
-
   if (element.requestFullscreen) {
     element.requestFullscreen();
   } else if (element.webkitRequestFullscreen) { /* Safari */
@@ -235,6 +233,7 @@ function startGame() {
   updateGame();
 }
 
+// Lane-based obstacle spawning (always leaves one lane open)
 function spawnObstaclesForRow() {
     const scale = 6;
     const width = opponentCarDesign[0].length * scale;
@@ -321,18 +320,18 @@ function updateGame() {
 
   // Screen shake effect
   if (shakeFrames > 0) {
-      const shakeX = (Math.random() - 0.5) * 10;
-      const shakeY = (Math.random() - 0.5) * 10;
-      ctx.translate(shakeX, shakeY);
-      shakeFrames--;
+    const shakeX = (Math.random() - 0.5) * 10;
+    const shakeY = (Math.random() - 0.5) * 10;
+    ctx.translate(shakeX, shakeY);
+    shakeFrames--;
   }
 
   // Set game speed based on power-up state
   gameSpeed = BASE_GAME_SPEED;
   if (nitroActive) {
-      gameSpeed = BASE_GAME_SPEED * NITRO_SPEED_MULTIPLIER;
+    gameSpeed = BASE_GAME_SPEED * NITRO_SPEED_MULTIPLIER;
   } else if (disasterActive) {
-      gameSpeed = BASE_GAME_SPEED * 0.25;
+    gameSpeed = BASE_GAME_SPEED * 0.25;
   }
   backgroundSpeed = gameSpeed;
 
@@ -340,38 +339,36 @@ function updateGame() {
 
   // Handle devastating meteoroid animation and effect
   if (disasterActive) {
-      disasterDuration--;
+    disasterDuration--;
+    if (disasterDuration > 0) {
+      // Move meteors towards their targets
+      for (let i = meteors.length - 1; i >= 0; i--) {
+        const m = meteors[i];
+        const dx = m.targetX - m.x;
+        const dy = m.targetY - m.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
 
-      if (disasterDuration > 0) {
-          // Move meteors towards their targets
-          for (let i = meteors.length - 1; i >= 0; i--) {
-              const m = meteors[i];
-              const dx = m.targetX - m.x;
-              const dy = m.targetY - m.y;
-              const dist = Math.sqrt(dx * dx + dy * dy);
-
-              if (dist > 1) {
-                  m.x += dx / 20;
-                  m.y += dy / 20;
-              } else {
-                  // Meteor hit its target
-                  blastSynth.triggerAttackRelease("4n");
-                  drawExplosion(m.targetX, m.targetY);
-                  meteors.splice(i, 1);
-              }
-              drawMeteor(m);
-          }
+        if (dist > 1) {
+          m.x += dx / 20;
+          m.y += dy / 20;
+        } else {
+          // Meteor hit its target
+          blastSynth.triggerAttackRelease("4n");
+          drawExplosion(m.targetX, m.targetY);
+          meteors.splice(i, 1);
+        }
+        drawMeteor(m);
       }
-
-      if (disasterDuration <= 0) {
-          disasterActive = false;
-          meteors = [];
-          gameContainer.classList.remove('disaster-active');
-      }
+    }
+    if (disasterDuration <= 0) {
+      disasterActive = false;
+      meteors = [];
+      gameContainer.classList.remove('disaster-active');
+    }
   }
 
   // Obstacles
-for (let obs of obstacles) {
+  for (let obs of obstacles) {
     obs.y += gameSpeed;
     drawCar(obs.x, obs.y, opponentCarDesign);
 
@@ -401,20 +398,19 @@ for (let obs of obstacles) {
     ctx.fillText('🛡️', shield.x + shield.width / 2, shield.y + shield.height / 2);
 
     // Check for collision with player
-      if (player.x < shield.x + shield.width &&
-        player.x + player.width > shield.x &&
-        player.y < shield.y + shield.height &&
-        player.y + player.height > shield.y) {
+    if (player.x < shield.x + shield.width &&
+      player.x + player.width > shield.x &&
+      player.y < shield.y + shield.height &&
+      player.y + player.height > shield.y) {
 
-        shieldSound.start();
-
-        if (!shieldActive) {
-            shieldActive = true;
-            shieldDuration = SHIELD_DURATION_FRAMES;
-            shieldDisplay.style.display = 'flex';
-            gameContainer.classList.add('shield-active');
-        }
-        shields.splice(i, 1);
+      shieldSound.start();
+      if (!shieldActive) {
+        shieldActive = true;
+        shieldDuration = SHIELD_DURATION_FRAMES;
+        shieldDisplay.style.display = 'flex';
+        gameContainer.classList.add('shield-active');
+      }
+      shields.splice(i, 1);
     }
   }
   shields = shields.filter(s => s.y < canvas.height + 20);
@@ -437,38 +433,35 @@ for (let obs of obstacles) {
 
     // Check for collision with player
     if (player.x < disaster.x + disaster.width &&
-        player.x + player.width > disaster.x &&
-        player.y < disaster.y + disaster.height &&
-        player.y + player.height > disaster.y) {
+      player.x + player.width > disaster.x &&
+      player.y < disaster.y + disaster.height &&
+      player.y + player.height > disaster.y) {
 
-        disasterActive = true;
-        disasterDuration = DISASTER_DURATION_FRAMES;
-        gameContainer.classList.add('disaster-active');
-
-        // Spawn meteors to hit all current cars
-        for(let obs of obstacles) {
-            meteors.push({
-                x: Math.random() * canvas.width,
-                y: -50,
-                size: Math.random() * 8 + 15,
-                targetX: obs.x + obs.width / 2,
-                targetY: obs.y + obs.height / 2,
-                speedX: 0,
-                speedY: 0,
-                alpha: 1
-            });
-            meteoroidSynth.triggerAttackRelease("C2", "8n");
-        }
-        obstacles = []; // Clear cars immediately
-
-        disasters.splice(i, 1);
+      disasterActive = true;
+      disasterDuration = DISASTER_DURATION_FRAMES;
+      gameContainer.classList.add('disaster-active');
+      // Spawn meteors to hit all current cars
+      for (let obs of obstacles) {
+        meteors.push({
+          x: Math.random() * canvas.width,
+          y: -50,
+          size: Math.random() * 8 + 15,
+          targetX: obs.x + obs.width / 2,
+          targetY: obs.y + obs.height / 2,
+          speedX: 0,
+          speedY: 0,
+          alpha: 1
+        });
+        meteoroidSynth.triggerAttackRelease("C2", "8n");
+      }
+      obstacles = []; // Clear cars immediately
+      disasters.splice(i, 1);
     }
   }
   disasters = disasters.filter(d => d.y < canvas.height + 20);
 
   // Spawning Logic
   let minOpponents, maxOpponents;
-
   if (score === 0) { minOpponents = 1; maxOpponents = 1; }
   else if (score >= 1 && score < 20) { minOpponents = 1; maxOpponents = 4; }
   else if (score >= 20 && score < 40) { minOpponents = 1; maxOpponents = 5; }
@@ -476,14 +469,14 @@ for (let obs of obstacles) {
   else if (score >= 70) { minOpponents = 5; maxOpponents = 5; }
 
   if (!disasterActive) {
-      if (obstacles.length < minOpponents) spawnObstaclesForRow();
-else if (obstacles.length < maxOpponents && Math.random() < 0.015) spawnObstaclesForRow();
+    if (obstacles.length < minOpponents) spawnObstaclesForRow();
+    else if (obstacles.length < maxOpponents && Math.random() < 0.015) spawnObstaclesForRow();
   }
   if (Math.random() < SHIELD_SPAWN_RATE && shields.length === 0 && disasters.length === 0 && !shieldActive && !disasterActive) {
-      spawnShield();
+    spawnShield();
   }
   if (Math.random() < DISASTER_SPAWN_RATE && disasters.length === 0 && shields.length === 0 && !shieldActive && !disasterActive) {
-      spawnDisaster();
+    spawnDisaster();
   }
 
   // Smoke particles
@@ -492,14 +485,14 @@ else if (obstacles.length < maxOpponents && Math.random() < 0.015) spawnObstacle
     const particleSize = nitroActive ? Math.random() * 10 + 5 : Math.random() * 5 + 3;
     const particleCount = nitroActive ? 3 : 1;
     for (let i = 0; i < particleCount; i++) {
-        smokeParticles.push({
-            x: player.x + player.width / 2 + Math.random() * 10 - 5,
-            y: player.y + player.height - 5,
-            size: particleSize,
-            alpha: 1,
-            speedY: backgroundSpeed + 2,
-            color: particleColor
-        });
+      smokeParticles.push({
+        x: player.x + player.width / 2 + Math.random() * 10 - 5,
+        y: player.y + player.height - 5,
+        size: particleSize,
+        alpha: 1,
+        speedY: backgroundSpeed + 2,
+        color: particleColor
+      });
     }
   }
   for (let i = smokeParticles.length - 1; i >= 0; i--) {
@@ -517,16 +510,16 @@ else if (obstacles.length < maxOpponents && Math.random() < 0.015) spawnObstacle
 
   // Explosion particles
   for (let i = explosionParticles.length - 1; i >= 0; i--) {
-      const p = explosionParticles[i];
-      p.x += p.speedX;
-      p.y += p.speedY;
-      p.alpha -= 0.05;
-      ctx.globalAlpha = p.alpha;
-      ctx.fillStyle = p.color;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, 2 * Math.PI);
-      ctx.fill();
-      if (p.alpha <= 0) explosionParticles.splice(i, 1);
+    const p = explosionParticles[i];
+    p.x += p.speedX;
+    p.y += p.speedY;
+    p.alpha -= 0.05;
+    ctx.globalAlpha = p.alpha;
+    ctx.fillStyle = p.color;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, 2 * Math.PI);
+    ctx.fill();
+    if (p.alpha <= 0) explosionParticles.splice(i, 1);
   }
   ctx.globalAlpha = 1;
 
@@ -541,13 +534,12 @@ else if (obstacles.length < maxOpponents && Math.random() < 0.015) spawnObstacle
 
   // Draw shield effect around player if active
   if (shieldActive) {
-      ctx.beginPath();
-      ctx.arc(player.x + player.width / 2, player.y + player.height / 2, player.width / 2 + 5, 0, 2 * Math.PI);
-      ctx.strokeStyle = `rgba(0, 170, 255, ${shieldDuration / SHIELD_DURATION_FRAMES})`;
-      ctx.lineWidth = 3;
-      ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(player.x + player.width / 2, player.y + player.height / 2, player.width / 2 + 5, 0, 2 * Math.PI);
+    ctx.strokeStyle = `rgba(0, 170, 255, ${shieldDuration / SHIELD_DURATION_FRAMES})`;
+    ctx.lineWidth = 3;
+    ctx.stroke();
   }
-
   ctx.restore();
   ctx.globalAlpha = 1;
 
@@ -582,18 +574,19 @@ else if (obstacles.length < maxOpponents && Math.random() < 0.015) spawnObstacle
 
   // Shield Countdown
   if (shieldActive) {
-      shieldDuration--;
-      shieldTimeDisplay.textContent = Math.ceil(shieldDuration / 60) + 's';
-      gameContainer.classList.add('shield-active');
-      if (shieldDuration <= 0) {
-          shieldActive = false;
-          shieldDisplay.style.display = 'none';
-          gameContainer.classList.remove('shield-active');
-      }
+    shieldDuration--;
+    shieldTimeDisplay.textContent = Math.ceil(shieldDuration / 60) + 's';
+    gameContainer.classList.add('shield-active');
+    if (shieldDuration <= 0) {
+      shieldActive = false;
+      shieldDisplay.style.display = 'none';
+      gameContainer.classList.remove('shield-active');
+    }
   }
 
   requestAnimationFrame(updateGame);
 }
+
 function endGame() {
   gameOver = true;
   if (score > highScore) {
@@ -609,22 +602,20 @@ function endGame() {
     playButton.style.display = 'block';
 
     requestAnimationFrame(() => {
-        playButton.style.opacity = '1';
+      playButton.style.opacity = '1';
     });
 
     if (bgMusic) {
-        bgMusic.muted = true;
+      bgMusic.muted = true;
     }
     musicToggle.style.display = 'flex';
   }, 500);
 }
 
 // --- Music Modal Logic ---
-
 const musicModal = document.getElementById('musicModal');
 const modalYes = musicModal.querySelector('.yes');
 const modalCancel = musicModal.querySelector('.cancel');
-
 let popupShown = sessionStorage.getItem('musicPopupShown') === 'true';
 
 // Override Play Button logic to show modal if not shown
@@ -647,7 +638,6 @@ modalYes.onclick = function() {
   // Enable music
   if (bgMusic) {
     bgMusic.muted = false;
-    // Attempt to play, catching potential autoplay block error
     bgMusic.play().catch(e => console.log('Autoplay blocked, unmuted only.'));
     musicToggle.textContent = '🔊';
     musicToggle.classList.remove('off');
@@ -677,7 +667,7 @@ musicModal.addEventListener('click', function(e){
   }
 });
 
-// Button Events
+// Music toggle events
 musicToggle.addEventListener("click", () => {
   musicEnabled = !musicEnabled;
   if (bgMusic) {
@@ -694,6 +684,7 @@ musicToggle.addEventListener("click", () => {
   localStorage.setItem('musicEnabled', musicEnabled);
 });
 
+// Nitro button events
 nitroBtn.addEventListener("click", () => {
   if (!gameOver && !nitroActive && nitroCooldown === 0) {
     nitroActive = true;
@@ -763,17 +754,37 @@ canvas.addEventListener('touchmove', (e) => {
     player.x = Math.max(0, Math.min(player.x, canvas.width - player.width));
   }
 });
+
+// Arrow keys for left/right movement
 document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowLeft") moveLeft();
-    if (e.key === "ArrowRight") moveRight();
+  if (e.key === "ArrowLeft") moveLeft();
+  if (e.key === "ArrowRight") moveRight();
 });
 
+// Mouse movement for PC control
 document.addEventListener("mousemove", (e) => {
-    // PC cursor control
-    handleMouseMove(e);
+  handleMouseMove(e);
 });
 
+// Touch movement for mobile
 document.addEventListener("touchmove", (e) => {
-    // Mobile touch control
-    handleTouchMove(e);
+  handleTouchMove(e);
 });
+
+// Example implementations of moveLeft/moveRight/handleMouseMove/handleTouchMove
+function moveLeft() {
+  if (player) {
+    player.x = Math.max(0, player.x - player.width);
+  }
+}
+function moveRight() {
+  if (player) {
+    player.x = Math.min(canvas.width - player.width, player.x + player.width);
+  }
+}
+function handleMouseMove(e) {
+  // Optionally implement custom PC mouse movement here
+}
+function handleTouchMove(e) {
+  // Optionally implement custom mobile touch movement here
+}
