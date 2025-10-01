@@ -476,8 +476,8 @@ for (let obs of obstacles) {
   else if (score >= 70) { minOpponents = 5; maxOpponents = 5; }
 
   if (!disasterActive) {
-      if (obstacles.length < minOpponents) spawnObstacle();
-      else if (obstacles.length < maxOpponents && Math.random() < 0.015) spawnObstacle();
+      if (obstacles.length < minOpponents) spawnObstaclesForRow();
+else if (obstacles.length < maxOpponents && Math.random() < 0.015) spawnObstaclesForRow();
   }
   if (Math.random() < SHIELD_SPAWN_RATE && shields.length === 0 && disasters.length === 0 && !shieldActive && !disasterActive) {
       spawnShield();
