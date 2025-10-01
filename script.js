@@ -235,13 +235,27 @@ function startGame() {
   updateGame();
 }
 
-function spawnObstacle() {
-  const scale = 6;
-  const width = opponentCarDesign[0].length * scale;
-  const height = opponentCarDesign.length * scale;
-  // No padding, allowing cars to spawn at the very edge of the road
-  const x = Math.random() * (canvas.width - width);
-  obstacles.push({ x, y: -height, width, height, passed: false });
+function spawnObstaclesForRow() {
+    const scale = 6;
+    const width = opponentCarDesign[0].length * scale;
+    const height = opponentCarDesign.length * scale;
+
+    // Define lane x-positions (for 3 lanes)
+    const lanePositions = [
+        canvas.width / 6 - width / 2,         // left lane
+        canvas.width / 2 - width / 2,         // center lane
+        (5 * canvas.width) / 6 - width / 2    // right lane
+    ];
+
+    // Randomly select which lane to leave empty
+    const emptyLane = Math.floor(Math.random() * lanePositions.length);
+
+    // Spawn obstacles in all lanes except the empty one
+    lanePositions.forEach((x, i) => {
+        if (i !== emptyLane) {
+            obstacles.push({ x, y: -height, width, height, passed: false });
+        }
+    });
 }
 
 function spawnShield() {
