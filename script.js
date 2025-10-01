@@ -749,3 +749,17 @@ canvas.addEventListener('touchmove', (e) => {
     player.x = Math.max(0, Math.min(player.x, canvas.width - player.width));
   }
 });
+document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") moveLeft();
+    if (e.key === "ArrowRight") moveRight();
+});
+
+document.addEventListener("mousemove", (e) => {
+    // PC cursor control
+    handleMouseMove(e);
+});
+
+document.addEventListener("touchmove", (e) => {
+    // Mobile touch control
+    handleTouchMove(e);
+});
