@@ -763,3 +763,11 @@ document.addEventListener("touchmove", (e) => {
     // Mobile touch control
     handleTouchMove(e);
 });
+
+
+const popup = document.getElementById('installPopup');
+document.getElementById('closeBtn').onclick = (e) => {
+  e.preventDefault(); // prevent link click on close
+  popup.style.top = '-100px';
+  setTimeout(() => popup.remove(), 500);
+};
