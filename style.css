@@ -284,7 +284,7 @@ body {
 .install {
   width: 30px;
   height: 30px;
-  background: #0f0;
+  background: 00ff55;
   border-radius: 50%;
   animation: pulse 0.8s infinite alternate;
 }
