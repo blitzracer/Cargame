@@ -304,13 +304,14 @@ body {
   text-decoration: none;
   animation: slideDown 0.6s forwards, pulseBg 1.2s infinite alternate;
   z-index: 9999;
+  touch-action: pan-x;
 }
 
 .install-popup button {
   background: none;
   border: none;
   color: #fff;
-  font-size: 18px;
+  font-size: 28px; /* increased size */
   cursor: pointer;
   margin-left: 12px;
 }
