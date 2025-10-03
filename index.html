@@ -82,18 +82,18 @@
 /* Install Popup */
 .install-popup {
   position: fixed;
-  top: -150px;               /* start hidden */
+  top: -120px;               /* start hidden */
   left: 50%;
   transform: translateX(-50%);
   background: linear-gradient(135deg, #28a745, #00ff55);
   color: #fff;
-  padding: 40px 12px;        /* increased vertical, reduced horizontal */
+  padding: 15px 40px;        /* reduced vertical, increased horizontal */
   border-radius: 14px;
   box-shadow: 0 4px 14px rgba(0,0,0,0.35);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-width: 160px;          /* narrower horizontally */
+  min-width: 300px;          /* wider horizontally */
   font-family: sans-serif;
   font-size: 18px;           /* slightly bigger text */
   font-weight: bold;
@@ -123,11 +123,14 @@
 
 /* Bounce animation */
 @keyframes bounceDown {
-  0% { top: -150px; }
+  0% { top: -120px; }
   60% { top: 30px; }
   80% { top: 15px; }
   100% { top: 20px; }
 }
+
+
+
 
 
 
