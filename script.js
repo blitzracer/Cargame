@@ -765,9 +765,41 @@ document.addEventListener("touchmove", (e) => {
 });
 
 
+
+
+
+
+
+
+
+
+
 const popup = document.getElementById('installPopup');
-document.getElementById('closeBtn').onclick = (e) => {
-  e.preventDefault(); // prevent link click on close
-  popup.style.top = '-100px';
-  setTimeout(() => popup.remove(), 500);
-};
+
+// Only show once per user
+if (!localStorage.getItem('installPopupShown')) {
+    popup.style.display = 'flex';
+    localStorage.setItem('installPopupShown', 'true');
+
+    // Auto-hide after 5 seconds
+    setTimeout(() => hidePopup(), 5000);
+
+    // Close button
+    document.getElementById('closeBtn').onclick = (e) => {
+        e.preventDefault();
+        hidePopup();
+    };
+
+    // Swipe to remove (left to right)
+    let startX = 0;
+    popup.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+    popup.addEventListener('touchmove', e => {
+        let moveX = e.touches[0].clientX;
+        if (moveX - startX > 50) hidePopup(); // swipe right
+    });
+}
+
+function hidePopup() {
+    popup.style.top = '-100px';
+    setTimeout(() => popup.remove(), 500);
+}
