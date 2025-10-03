@@ -69,51 +69,72 @@
 
     <!-- Install Popup Styles -->
     <style>
-    .install-popup {
-      position: fixed;
-      top: -120px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: linear-gradient(135deg, #28a745, #00ff55);
-      color: #fff;
-      padding: 18px 26px;
-      border-radius: 12px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.35);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      min-width: 260px;
-      font-family: sans-serif;
-      font-size: 16px;
-      font-weight: bold;
-      text-decoration: none;
-      z-index: 9999;
-      cursor: pointer;
-      opacity: 0;
-      transition: top 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
-    }
+    
 
-    .install-popup.show {
-      top: 20px;
-      opacity: 1;
-      animation: bounceDown 0.6s;
-    }
 
-    .install-popup button {
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 36px;
-      cursor: pointer;
-      margin-left: 12px;
-    }
 
-    @keyframes bounceDown {
-      0% { top: -120px; }
-      60% { top: 30px; }
-      80% { top: 15px; }
-      100% { top: 20px; }
-    }
+
+
+
+
+
+
+/* Install Popup */
+.install-popup {
+  position: fixed;
+  top: -150px;               /* start hidden */
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #28a745, #00ff55);
+  color: #fff;
+  padding: 40px 12px;        /* increased vertical, reduced horizontal */
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 160px;          /* narrower horizontally */
+  font-family: sans-serif;
+  font-size: 18px;           /* slightly bigger text */
+  font-weight: bold;
+  text-decoration: none;
+  z-index: 9999;
+  cursor: pointer;
+  opacity: 0;
+  transition: top 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Show state */
+.install-popup.show {
+  top: 20px;
+  opacity: 1;
+  animation: bounceDown 0.6s;
+}
+
+/* Close button */
+.install-popup button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 36px;            /* large close button */
+  cursor: pointer;
+  margin-left: 12px;
+}
+
+/* Bounce animation */
+@keyframes bounceDown {
+  0% { top: -150px; }
+  60% { top: 30px; }
+  80% { top: 15px; }
+  100% { top: 20px; }
+}
+
+
+
+
+
+
+
     </style>
 
 </head>
