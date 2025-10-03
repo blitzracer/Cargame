@@ -66,6 +66,56 @@
 
     <!-- Tone.js Library -->  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js" crossorigin="anonymous"></script>
+
+    <!-- Install Popup Styles -->
+    <style>
+    .install-popup {
+      position: fixed;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #28a745, #00ff55);
+      color: #fff;
+      padding: 18px 26px;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-width: 260px;
+      font-family: sans-serif;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      z-index: 9999;
+      cursor: pointer;
+      opacity: 0;
+      transition: top 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .install-popup.show {
+      top: 20px;
+      opacity: 1;
+      animation: bounceDown 0.6s;
+    }
+
+    .install-popup button {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 36px;
+      cursor: pointer;
+      margin-left: 12px;
+    }
+
+    @keyframes bounceDown {
+      0% { top: -120px; }
+      60% { top: 30px; }
+      80% { top: 15px; }
+      100% { top: 20px; }
+    }
+    </style>
+
 </head>
 <body>
     <!-- Background Music -->
@@ -113,9 +163,57 @@
 
     <!-- Game Script -->
     <script src="/Cargame/script.js"></script>
-<a id="installPopup" class="install-popup" href="https://blitzracer.github.io/Cargameapk/" target="_blank">
-  <span>Install BlitzRacer</span>
-  <button id="closeBtn">&times;</button>
-</a>
+
+    <!-- Install Popup HTML -->
+    <a id="installPopup" class="install-popup" href="https://blitzracer.github.io/Cargameapk/" target="_blank">
+      <span>Install BlitzRacer</span>
+      <button id="closeBtn">&times;</button>
+    </a>
+
+    <!-- Install Popup Script -->
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const popup = document.getElementById('installPopup');
+      const link = "https://blitzracer.github.io/Cargameapk/";
+
+      if (!localStorage.getItem('installPopupShown')) {
+        localStorage.setItem('installPopupShown', 'true');
+        popup.classList.add('show');
+
+        // Auto-hide after 5s
+        const autoHide = setTimeout(hidePopup, 5000);
+
+        // Close button
+        document.getElementById('closeBtn').onclick = (e) => {
+          e.stopPropagation();
+          clearTimeout(autoHide);
+          hidePopup();
+        };
+
+        // Click anywhere opens link
+        popup.addEventListener('click', () => {
+          window.open(link, "_blank");
+        });
+
+        // Swipe to dismiss
+        let startX = 0;
+        popup.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+        popup.addEventListener('touchmove', e => {
+          let moveX = e.touches[0].clientX;
+          if (moveX - startX > 50) {
+            clearTimeout(autoHide);
+            hidePopup();
+          }
+        });
+      }
+
+      function hidePopup() {
+        popup.style.top = '-150px';
+        popup.style.opacity = '0';
+        popup.style.transform = 'translateX(-50%)';
+        setTimeout(() => popup.remove(), 500);
+      }
+    });
+    </script>
 </body>
 </html>
