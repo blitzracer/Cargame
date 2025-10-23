@@ -2,7 +2,7 @@
 
 // Declare constants using lowercase 'const'
 // 🚨 FIXED TYPO and BUMPED VERSION (v14) for a guaranteed update.
-const CACHE_NAME = 'blitzracer-v14'; 
+const CACHE_NAME = 'blitzracer-v15'; 
 const urlsToCache = [
   '/Cargame/', 
   '/Cargame/index.html',
