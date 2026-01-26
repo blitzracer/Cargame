@@ -1,17 +1,17 @@
 // Service Worker file: service-worker.js
 
-const CACHE_NAME = 'blitzracer-v17';
+const CACHE_NAME = 'blitzracer-v18';
 const urlsToCache = [
   '/',
-  'index.html',
-  'style.css',
-  'script.js',
-  'manifest.json',
-  'offline.html',
-  'cargame192.png',
-  'cargame512.png',
-  'cargamebg.mp3',
-  'shieldcargame.mp3',
+  '/index.html',
+  '/style.css',
+  '/script.js',
+  '/manifest.json',
+  '/offline.html',
+  '/cargame192.png',
+  '/cargame512.png',
+  '/cargamebg.mp3',
+  '/shieldcargame.mp3',
   
   // External libraries
   'https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js'
@@ -19,7 +19,7 @@ const urlsToCache = [
 
 // ---------------------- INSTALLATION ----------------------
 self.addEventListener('install', (event) => {
-  console.log('[Service Worker] Installing v17...');
+  console.log('[Service Worker] Installing v18...');
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(urlsToCache);
@@ -59,7 +59,7 @@ self.addEventListener('fetch', (event) => {
           if (event.request.mode === 'navigate' || 
               (event.request.method === 'GET' && 
                event.request.headers.get('accept').includes('text/html'))) {
-            return caches.match('index.html');
+            return caches.match('/index.html');
           }
         });
       })
