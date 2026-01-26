@@ -8,14 +8,14 @@
     <title>BlitzRacer - Free Online Racing Game | Download & Play Now</title>  
 
     <!-- PWA Manifest -->  
-    <link rel="manifest" href="manifest.json">  
+    <link rel="manifest" href="/manifest.json">  
 
     <!-- Theme color for mobile browsers -->  
     <meta name="theme-color" content="#111111">  
 
     <!-- Favicon & Apple Icons -->  
-    <link rel="icon" type="image/png" sizes="192x192" href="cargame192.png">  
-    <link rel="apple-touch-icon" sizes="512x512" href="cargame512.png">  
+    <link rel="icon" type="image/png" sizes="192x192" href="/cargame192.png">  
+    <link rel="apple-touch-icon" sizes="512x512" href="/cargame512.png">  
 
     <!-- Comprehensive SEO Meta Tags -->  
     <meta name="description" content="Play BlitzRacer - a fast-paced, bite-sized racing game! Enjoy online/offline arcade racing for free. Download now for mobile & desktop. No registration required.">  
@@ -90,7 +90,7 @@
     <meta name="msapplication-TileColor" content="#111111">
 
     <!-- Stylesheet -->  
-    <link rel="stylesheet" href="style.css">  
+    <link rel="stylesheet" href="/style.css">  
 
     <!-- Tone.js Library -->  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js" crossorigin="anonymous" integrity="sha512-+JsZcBqDd0y4VkD13hQM4zQ8a1x7v9Q6XZk6V8QbE4zJ9Qh9QlVv6mF41JQ7yGZQ9lgtdJi3ROV3jQ8pUe6jJuw==" referrerpolicy="no-referrer"></script>
@@ -151,7 +151,7 @@
 </head>
 <body>
     <!-- Background Music -->
-    <audio id="bg-music" src="cargamebg.mp3" autoplay loop muted preload="auto"></audio>
+    <audio id="bg-music" src="/cargamebg.mp3" autoplay loop muted preload="auto"></audio>
 
     <!-- Scores -->
     <div id="high-score" class="score-display">High Score: 0</div>
@@ -194,7 +194,7 @@
     </div>
 
     <!-- Game Script -->
-    <script src="script.js"></script>
+    <script src="/script.js"></script>
 
     <!-- Install Popup HTML -->
     <a id="installPopup" class="install-popup" href="https://blitzracer.github.io/Cargameapk/" target="_blank" rel="noopener noreferrer">
@@ -253,7 +253,7 @@
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', async () => {
         try {
-          const registration = await navigator.serviceWorker.register('service-worker.js', { 
+          const registration = await navigator.serviceWorker.register('/service-worker.js', { 
             scope: '/' 
           });
           console.log('ServiceWorker registered:', registration.scope);
