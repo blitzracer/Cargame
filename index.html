@@ -8,14 +8,14 @@
     <title>BlitzRacer - Free Online Racing Game | Download & Play Now</title>  
 
     <!-- PWA Manifest -->  
-    <link rel="manifest" href="https://blitzracer.vercel.app/manifest.json">  
+    <link rel="manifest" href="manifest.json">  
 
     <!-- Theme color for mobile browsers -->  
     <meta name="theme-color" content="#111111">  
 
     <!-- Favicon & Apple Icons -->  
-    <link rel="icon" type="image/png" sizes="192x192" href="https://blitzracer.vercel.app/cargame192.png">  
-    <link rel="apple-touch-icon" sizes="512x512" href="https://blitzracer.vercel.app/cargame512.png">  
+    <link rel="icon" type="image/png" sizes="192x192" href="cargame192.png">  
+    <link rel="apple-touch-icon" sizes="512x512" href="cargame512.png">  
 
     <!-- Comprehensive SEO Meta Tags -->  
     <meta name="description" content="Play BlitzRacer - a fast-paced, bite-sized racing game! Enjoy online/offline arcade racing for free. Download now for mobile & desktop. No registration required.">  
@@ -34,7 +34,6 @@
     <meta property="og:type" content="game">  
     <meta property="og:site_name" content="BlitzRacer">  
     <meta property="og:locale" content="en_US">  
-    <meta property="og:video" content="https://blitzracer.vercel.app/gameplay-trailer.mp4">  
 
     <!-- Twitter Card -->  
     <meta name="twitter:card" content="summary_large_image">  
@@ -77,16 +76,7 @@
         "ratingCount": "1500",
         "bestRating": "5",
         "worstRating": "1"
-      },
-      "gamePlay": {
-        "@type": "CreativeWork",
-        "description": "Use mouse or touch to steer your car, avoid obstacles, collect power-ups, and use nitro boosts to achieve high scores."
-      },
-      "screenshot": [
-        "https://blitzracer.vercel.app/screenshot1.jpg",
-        "https://blitzracer.vercel.app/screenshot2.jpg",
-        "https://blitzracer.vercel.app/screenshot3.jpg"
-      ]
+      }
     }
     </script>
 
@@ -98,10 +88,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-TileColor" content="#111111">
-    <meta name="msapplication-TileImage" content="https://blitzracer.vercel.app/cargame144.png">
 
     <!-- Stylesheet -->  
-    <link rel="stylesheet" href="https://blitzracer.vercel.app/style.css">  
+    <link rel="stylesheet" href="style.css">  
 
     <!-- Tone.js Library -->  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js" crossorigin="anonymous" integrity="sha512-+JsZcBqDd0y4VkD13hQM4zQ8a1x7v9Q6XZk6V8QbE4zJ9Qh9QlVv6mF41JQ7yGZQ9lgtdJi3ROV3jQ8pUe6jJuw==" referrerpolicy="no-referrer"></script>
@@ -162,7 +151,7 @@
 </head>
 <body>
     <!-- Background Music -->
-    <audio id="bg-music" src="https://blitzracer.vercel.app/cargamebg.mp3" autoplay loop muted preload="auto"></audio>
+    <audio id="bg-music" src="cargamebg.mp3" autoplay loop muted preload="auto"></audio>
 
     <!-- Scores -->
     <div id="high-score" class="score-display">High Score: 0</div>
@@ -205,7 +194,7 @@
     </div>
 
     <!-- Game Script -->
-    <script src="https://blitzracer.vercel.app/script.js"></script>
+    <script src="script.js"></script>
 
     <!-- Install Popup HTML -->
     <a id="installPopup" class="install-popup" href="https://blitzracer.github.io/Cargameapk/" target="_blank" rel="noopener noreferrer">
@@ -264,7 +253,7 @@
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', async () => {
         try {
-          const registration = await navigator.serviceWorker.register('https://blitzracer.vercel.app/service-worker.js', { 
+          const registration = await navigator.serviceWorker.register('service-worker.js', { 
             scope: '/' 
           });
           console.log('ServiceWorker registered:', registration.scope);
